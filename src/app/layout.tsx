@@ -20,7 +20,7 @@ export default function RootLayout({
   return (
     <html lang="pt-PT" className="scroll-smooth">
       {/* 2. ADICIONA O COMPONENTE AQUI (Substitui pelo teu ID real 'GTM-XXXXXX') */}
-      <GoogleTagManager gtmId="GTM-SEU_CODIGO_AQUI" />
+      <GoogleTagManager gtmId="GTM-MRQMT83B" />
       
       <body className={inter.className}>{children}</body>
     </html>

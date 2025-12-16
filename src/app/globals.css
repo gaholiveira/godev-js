@@ -1,9 +1,13 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* MUDANÇA: Fixamos as cores para o tema escuro (Slate 950) */
+  /* Isso garante que o site seja sempre Dark, mesmo que o cliente use Light Mode */
+  --background: #020617; 
+  --foreground: #ededed;
 }
+
+/* Removemos o @media (prefers-color-scheme: dark) para não haver troca automática */
 
 @theme inline {
   --color-background: var(--background);
@@ -12,15 +16,34 @@
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+  
+  /* Deixa as fontes mais nítidas em telas modernas */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* --- ESTILO DA BARRA DE ROLAGEM (SCROLLBAR TECH) --- */
+/* Isso só funciona em navegadores baseados no Chrome/Edge/Safari,
+   mas dá um toque muito profissional */
+
+::-webkit-scrollbar {
+  width: 10px; /* Largura da barra */
+}
+
+::-webkit-scrollbar-track {
+  background: #020617; /* Cor do fundo (igual ao site) */
+}
+
+::-webkit-scrollbar-thumb {
+  background: #1e293b; /* Cor da barra (Cinza Escuro) */
+  border-radius: 5px;
+  border: 2px solid #020617; /* Espaço entre a barra e a borda */
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #3b82f6; /* Azul brilhante ao passar o mouse (Interativo) */
 }

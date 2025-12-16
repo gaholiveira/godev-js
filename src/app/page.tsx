@@ -120,7 +120,7 @@ export default function Home() {
     // ----------------------------
 
     const text = `Olá Gabriel! Meu nome é *${formData.name}*. \nTenho interesse em: *${formData.service}*. \n\n${formData.message ? `Detalhes: ${formData.message}` : ''}`;
-    const whatsappUrl = `https://wa.me/55seu_numero_aqui?text=${encodeURIComponent(text)}`;
+    const whatsappUrl = `https://wa.me/5516994064845?text=${encodeURIComponent(text)}`;
     
     window.open(whatsappUrl, '_blank');
     setIsModalOpen(false);

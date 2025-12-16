@@ -1,10 +1,11 @@
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
-
-const inter = Inter({ subsets: ['latin'] });
+import { GoogleTagManager } from '@next/third-parties/google';
 
 // AQUI ESTÁ O SEGREDO DO WHATSAPP/GOOGLE
+const inter = Inter({ subsets: ['latin'] });
+
 export const metadata: Metadata = {
   title: 'godev.js | Fullstack Developer',
   description: 'Portfólio de Gabriel Oliveira. Soluções web modernas com a stack JavaScript.',
@@ -17,8 +18,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="pt-PT" className="scroll-smooth"> 
-      {/* Adicionei 'scroll-smooth' acima para a rolagem ser suave */}
+    <html lang="pt-PT" className="scroll-smooth">
+      {/* 2. ADICIONA O COMPONENTE AQUI (Substitui pelo teu ID real 'GTM-XXXXXX') */}
+      <GoogleTagManager gtmId="GTM-SEU_CODIGO_AQUI" />
+      
       <body className={inter.className}>{children}</body>
     </html>
   );

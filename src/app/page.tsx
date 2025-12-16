@@ -100,8 +100,28 @@ export default function Home() {
   // 3. FUNÇÃO DE ENVIO
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    
+    // --- CÓDIGO DO GTM (NOVO) ---
+    // Verifica se estamos no navegador para evitar erros
+    if (typeof window !== 'undefined') {
+      // Usamos (window as any) para o TypeScript não reclamar que dataLayer não existe
+      
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const dataLayer = (window as any).dataLayer || [];
+      
+      dataLayer.push({
+        event: 'generate_lead', // Nome padrão que o Google Ads gosta
+        user_name: formData.name, // Opcional: enviar dados extras
+        selected_service: formData.service
+      });
+      
+      console.log("Evento GTM disparado: generate_lead");
+    }
+    // ----------------------------
+
     const text = `Olá Gabriel! Meu nome é *${formData.name}*. \nTenho interesse em: *${formData.service}*. \n\n${formData.message ? `Detalhes: ${formData.message}` : ''}`;
-    const whatsappUrl = `https://wa.me/5516994064845?text=${encodeURIComponent(text)}`;
+    const whatsappUrl = `https://wa.me/55seu_numero_aqui?text=${encodeURIComponent(text)}`;
+    
     window.open(whatsappUrl, '_blank');
     setIsModalOpen(false);
     setFormData({ name: '', email: '', service: 'Desenvolvimento Web', message: '' });

@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { Laptop, Smartphone, Bot, ChevronRight, Github, Linkedin, Instagram, FileCode2, X } from 'lucide-react';
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence, motion, Variants } from 'framer-motion';
 
 // --- COMPONENTE DE FUNDO OTIMIZADO ---
 const EnergyBackground = () => {
@@ -68,7 +68,7 @@ const projects = [
   },
 ];
 
-const containerVariants = {
+const containerVariants: Variants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
@@ -76,7 +76,7 @@ const containerVariants = {
   }
 };
 
-const itemVariants = {
+const itemVariants: Variants = {
   hidden: { opacity: 0, y: 50 },
   visible: { 
     opacity: 1, 

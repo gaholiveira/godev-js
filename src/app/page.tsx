@@ -385,7 +385,7 @@ export default function Home() {
         </motion.div>
       </section>
 
-      {/* --- PROJETOS --- */}
+      {/* --- PROJETOS ---*/}
       <section id="portfolio" className="py-24 px-9 max-w-6xl mx-auto w-full relative z-10">
         <div className="flex flex-col md:flex-row justify-between items-end mb-12 gap-4">
           <div>

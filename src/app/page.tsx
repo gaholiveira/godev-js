@@ -392,7 +392,7 @@ export default function Home() {
             <h2 className="text-3xl font-bold text-white mb-2">Projetos Selecionados</h2>
             <p className="text-slate-400">Obras que geram valor real.</p>
           </div>
-          <a href="#" className="text-amber-400 hover:text-amber-300 font-mono text-sm flex items-center gap-2 transition-colors">
+          <a href="https://github.com/gaholiveira" className="text-amber-400 hover:text-amber-300 font-mono text-sm flex items-center gap-2 transition-colors">
             VER GITHUB <ChevronRight size={14} />
           </a>
         </div>

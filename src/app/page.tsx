@@ -75,16 +75,25 @@ const containerVariants: Variants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
-    transition: { staggerChildren: 0.3 }
+    transition: { 
+      staggerChildren: 0.2, // Um pouco mais rápido entre itens para fluidez
+      delayChildren: 0.1 
+    }
   }
 };
 
 const itemVariants: Variants = {
-  hidden: { opacity: 0, y: 50 },
+  hidden: { 
+    opacity: 0, 
+    y: 50 // Diminui a distância (era 50). Menos movimento = Menos chance de parecer lag.
+  }, 
   visible: { 
     opacity: 1, 
     y: 0, 
-    transition: { type: "spring", stiffness: 50, damping: 20 } 
+    transition: { 
+      duration: 0.8, // Duração longa para ser suave
+      ease: [0.25, 0.46, 0.45, 0.94] // Curva "Cubic Bezier" elegante (não é mola)
+    } 
   }
 };
 
@@ -368,7 +377,7 @@ export default function Home() {
             <motion.div 
               key={service.id}
               variants={itemVariants}
-              className="group p-8 border border-white/10 rounded-2xl bg-slate-900/40 backdrop-blur-sm hover:bg-slate-800/60 transition-all hover:border-blue-500/50 hover:shadow-[0_0_30px_rgba(59,130,246,0.1)]"
+              className="group p-8 border border-white/10 rounded-2xl bg-slate-900/40 backdrop-blur-sm hover:bg-slate-800/60 transition-colors duration-300 hover:border-blue-500/50 hover:shadow-[0_0_30px_rgba(59,130,246,0.1)]"
             >
               <div className="mb-6 bg-blue-500/10 w-16 h-16 flex items-center justify-center rounded-xl border border-blue-500/20 group-hover:border-blue-500/50 transition-colors">
                 <motion.div
@@ -405,7 +414,7 @@ export default function Home() {
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5 }}
-              className="group rounded-2xl overflow-hidden bg-slate-900/50 border border-white/5 hover:border-amber-500/30 transition-all"
+              className="group rounded-2xl overflow-hidden bg-slate-900/50 border border-white/5 transition-colors duration-300 hover:border-amber-500/30"
             >
               {/* CONTAINER DA IMAGEM */}
               <div className="h-64 w-full relative overflow-hidden">

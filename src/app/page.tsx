@@ -1,10 +1,10 @@
 'use client';
 
 import React, { useState } from 'react';
-import { Laptop, Smartphone, Bot, ChevronRight, Github, Linkedin, Instagram, FileCode2, X } from 'lucide-react';
+// Adicionei Plus, Minus e Instagram aos imports
+import { Laptop, Smartphone, Bot, ChevronRight, Github, Linkedin, Instagram, FileCode2, X, Plus, Minus } from 'lucide-react';
 import { AnimatePresence, motion, Variants } from 'framer-motion';
 import Image from 'next/image';
-import { image } from 'framer-motion/client';
 
 // --- COMPONENTE DE FUNDO OTIMIZADO ---
 const EnergyBackground = () => {
@@ -42,9 +42,43 @@ interface ServiceItem {
 }
 
 const services: ServiceItem[] = [
-  { id: 1, title: "Desenvolvimento Web", description: "Sites de alta performance, Landing Pages e E-commerce otimizados.", icon: Laptop },
-  { id: 2, title: "Apps Mobile", description: "Aplicativos nativos para iOS e Android rápidos e intuitivos.", icon: Smartphone },
-  { id: 3, title: "Automações & Chatbots", description: "Reduza custos automatizando atendimento e processos repetitivos.", icon: Bot },
+  { 
+    id: 1, 
+    title: "Sites de Alta Conversão", 
+    description: "Seu site carrega em 1 segundo? O meu sim. Otimizado para o Google (SEO) para colocar sua empresa no topo sem gastar com anúncios.", 
+    icon: Laptop 
+  },
+  { 
+    id: 2, 
+    title: "Apps Próprios", 
+    description: "Fidelize seus melhores clientes. Pare de depender de algoritmos de terceiros e tenha seu próprio canal de vendas direto no bolso do cliente.", 
+    icon: Smartphone 
+  },
+  { 
+    id: 3, 
+    title: "Automação de Vendas", 
+    description: "Atenda 100 clientes ao mesmo tempo. Automatize agendamentos e suporte para vender enquanto você dorme.", 
+    icon: Bot 
+  },
+];
+
+const faqs = [
+  {
+    question: "Por que investir em um site Next.js e não Wordpress?",
+    answer: "Wordpress é genérico e lento. Next.js é a tecnologia usada por gigantes como Uber e Netflix. Garantimos carregamento em menos de 1 segundo, o que melhora seu posicionamento no Google e aumenta conversão."
+  },
+  {
+    question: "Quanto tempo demora para entregar o projeto?",
+    answer: "Depende da complexidade. Landing Pages de alta performance são entregues em média em 7 a 10 dias úteis. Apps e Sistemas personalizados levam de 30 a 60 dias."
+  },
+  {
+    question: "Vocês fazem o design ou preciso contratar à parte?",
+    answer: "Cuidamos de tudo. Do design estratégico focado em vendas até a programação e publicação no ar."
+  },
+  {
+    question: "Como funciona o pagamento?",
+    answer: "Trabalhamos com contrato seguro. Geralmente 50% na entrada para início imediato e 50% na entrega final aprovada."
+  }
 ];
 
 const techStack = [
@@ -58,7 +92,6 @@ const projects = [
     id: 1,
     title: "Landing Page Consultoria",
     category: "Web App • Next.js",
-    // Coloque uma imagem real na pasta public ou use um link externo para testar
     image: "/prova.png",
     description: "Site responsivo para consultoria de marketplaces, focado em conversão e SEO."
   },
@@ -66,7 +99,7 @@ const projects = [
     id: 2,
     title: "App Financeiro",
     category: "Mobile • React Native",
-    image: "/prova2.png", 
+    image: "/prova.png", 
     description: "Aplicativo de controle financeiro pessoal com integração bancária segura."
   },
 ];
@@ -76,7 +109,7 @@ const containerVariants: Variants = {
   visible: {
     opacity: 1,
     transition: { 
-      staggerChildren: 0.2, // Um pouco mais rápido entre itens para fluidez
+      staggerChildren: 0.2, 
       delayChildren: 0.1 
     }
   }
@@ -85,19 +118,19 @@ const containerVariants: Variants = {
 const itemVariants: Variants = {
   hidden: { 
     opacity: 0, 
-    y: 50 // Diminui a distância (era 50). Menos movimento = Menos chance de parecer lag.
+    y: 50 
   }, 
   visible: { 
     opacity: 1, 
     y: 0, 
     transition: { 
-      duration: 0.8, // Duração longa para ser suave
-      ease: [0.25, 0.46, 0.45, 0.94] // Curva "Cubic Bezier" elegante (não é mola)
+      duration: 0.8, 
+      ease: [0.25, 0.46, 0.45, 0.94]
     } 
   }
 };
 
-// --- COMPONENTE LOGO HERO (Versão Viva & Pulsante) ---
+// --- COMPONENTE LOGO HERO ---
 const TechLogo = () => {
   return (
     <motion.div
@@ -106,78 +139,32 @@ const TechLogo = () => {
       transition={{ duration: 0.8, ease: "backOut" }}
       className="relative w-64 h-64 md:w-80 md:h-80 mb-10 flex items-center justify-center"
     >
-      {/* 1. CAMADA DE LEVITAÇÃO (O chip flutua no espaço) */}
       <motion.div
-        animate={{ y: [0, -15, 0] }} // Sobe 15px e desce
-        transition={{ 
-          duration: 6, // Lento e suave (6 segundos)
-          repeat: Infinity, 
-          ease: "easeInOut" 
-        }}
+        animate={{ y: [0, -15, 0] }}
+        transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
         className="relative w-full h-full flex items-center justify-center"
       >
-        
-        {/* 2. CAMADA DE PULSAÇÃO DE LUZ (Glow) */}
         <motion.div 
-          animate={{ 
-            opacity: [0.2, 0.5, 0.2], // Brilho aumenta e diminui
-            scale: [0.8, 1.1, 0.8]   // Luz expande e contrai
-          }}
-          transition={{ 
-            duration: 4, 
-            repeat: Infinity, 
-            ease: "easeInOut" 
-          }}
+          animate={{ opacity: [0.2, 0.5, 0.2], scale: [0.8, 1.1, 0.8] }}
+          transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
           className="absolute inset-10 bg-blue-500/30 rounded-full blur-3xl" 
         />
-
-        {/* 3. O SVG DO CHIP */}
-        <svg 
-          xmlns="http://www.w3.org/2000/svg" 
-          viewBox="0 0 50 50" 
-          className="w-full h-full drop-shadow-2xl relative z-10"
-        >
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" className="w-full h-full drop-shadow-2xl relative z-10">
           <g fill="none" strokeLinecap="round" strokeLinejoin="round">
-            
-            {/* PINOS (Circuito com Energia Passando) */}
             <motion.path 
               strokeWidth="0.5"
               d="M12.5 33.333H8.333M25 12.5V6.25zm8.333 0V8.333zm-16.666 0V8.333zM37.5 25h6.25zm0 8.333h4.167zm0-16.666h4.167zM25 37.5v6.25zm-8.333 0v4.167zm16.666 0v4.167zM12.5 25H6.25zm0-8.333H8.333z"
-              // Animação inicial de desenho
               initial={{ pathLength: 0 }}
-              animate={{ 
-                pathLength: 1, 
-                stroke: ["#94a3b8", "#60a5fa", "#94a3b8"] // Cinza -> Azul Claro -> Cinza
-              }}
-              transition={{ 
-                pathLength: { duration: 1.5, ease: "easeInOut" }, // Desenha uma vez
-                stroke: { duration: 3, repeat: Infinity, ease: "easeInOut", delay: 1 } // Loop de cor infinito
-              }}
+              animate={{ pathLength: 1, stroke: ["#94a3b8", "#60a5fa", "#94a3b8"] }}
+              transition={{ pathLength: { duration: 1.5, ease: "easeInOut" }, stroke: { duration: 3, repeat: Infinity, ease: "easeInOut", delay: 1 } }}
             />
-            
-            {/* CORPO DO CHIP (Borda Azul Constante) */}
             <motion.path 
-              stroke="#3b82f6" 
-              strokeWidth="0.8"
-              fill="rgba(2, 6, 23, 0.95)" 
+              stroke="#3b82f6" strokeWidth="0.8" fill="rgba(2, 6, 23, 0.95)" 
               d="M35.417 12.5H14.583c-1.15 0-2.083.933-2.083 2.083v20.834c0 1.15.933 2.083 2.083 2.083h20.834c1.15 0 2.083-.933 2.083-2.083V14.583c0-1.15-.933-2.083-2.083-2.083"
-              initial={{ pathLength: 0 }}
-              animate={{ pathLength: 1 }}
-              transition={{ duration: 1.5, ease: "easeInOut" }}
+              initial={{ pathLength: 0 }} animate={{ pathLength: 1 }} transition={{ duration: 1.5, ease: "easeInOut" }}
             />
           </g>
-
-          {/* TEXTO CENTRAL */}
-          <text
-            x="24.5"
-            y="26"
-            dominantBaseline="middle"
-            textAnchor="middle"
-            fontSize="3.9"
-            fontFamily="monospace"
-            fontWeight="600"
-            className="select-none pointer-events-none tracking-widest"
-          >
+          <text x="24.5" y="26" dominantBaseline="middle" textAnchor="middle" fontSize="4.0" fontFamily="monospace" fontWeight="600" className="select-none pointer-events-none tracking-widest">
             <tspan fill="#3b82f6" dx="-0.5"></tspan>
             <tspan fill="#ffffff" dx="0.5">godev</tspan>
             <tspan fill="#fbbf24">.js</tspan>
@@ -189,11 +176,146 @@ const TechLogo = () => {
   );
 };
 
+// --- COMPONENTE SOBRE MIM ---
+const AboutSection = () => {
+  return (
+    <section className="py-24 px-6 max-w-6xl mx-auto w-full relative z-10 border-t border-white/5">
+      <div className="flex flex-col md:flex-row items-center gap-12 md:gap-20">
+        {/* Foto */}
+        <motion.div 
+          initial={{ opacity: 0, x: -50 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+          className="relative w-full md:w-1/2 flex justify-center md:justify-end"
+        >
+          <div className="relative w-64 h-64 md:w-80 md:h-80">
+            <div className="absolute inset-0 bg-gradient-to-tr from-blue-600 to-amber-500 rounded-full blur-2xl opacity-20 animate-pulse" />
+            <div className="relative w-full h-full rounded-full border-2 border-white/10 overflow-hidden bg-slate-900 shadow-2xl">
+              {/* ATENÇÃO: Coloque sua foto real nomeada como 'perfil.jpg' na pasta public */}
+              <Image 
+                src="/Eu-foto.png" 
+                alt="Gabriel Oliveira" 
+                fill 
+                className="object-cover hover:scale-110 transition-transform duration-700"
+              />
+            </div>
+            <motion.div 
+              initial={{ scale: 0 }}
+              whileInView={{ scale: 1 }}
+              transition={{ delay: 0.5, type: "spring", stiffness: 200 }}
+              className="absolute -bottom-4 -right-4 bg-slate-800 border border-white/10 p-4 rounded-2xl shadow-xl flex items-center gap-3"
+            >
+              <div className="bg-blue-500/20 p-2 rounded-full">
+                <FileCode2 className="text-blue-400" size={24} />
+              </div>
+              <div>
+                <span className="block text-2xl font-bold text-white">3+</span>
+                <span className="text-xs text-slate-400 font-mono">ANOS DE EXP.</span>
+              </div>
+            </motion.div>
+          </div>
+        </motion.div>
+
+        {/* Texto */}
+        <motion.div 
+          initial={{ opacity: 0, x: 50 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+          className="w-full md:w-1/2"
+        >
+          <span className="text-amber-400 font-mono text-sm tracking-wider mb-2 block">QUEM ESTÁ NOS BASTIDORES</span>
+          <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
+            Mais do que código,<br />
+            <span className="text-blue-500">Estratégia Digital.</span>
+          </h2>
+          
+          <p className="text-slate-400 leading-relaxed mb-6 text-lg">
+            Olá, sou o <strong className="text-white">Gabriel Oliveira</strong>. 
+            Acredito que um site lento e mal estruturado é dinheiro deixado na mesa.
+          </p>
+          
+          <p className="text-slate-400 leading-relaxed mb-8">
+            Minha missão não é apenas escrever linhas de código, mas criar ecossistemas digitais que vendem por si sós.
+            Trabalho com a mesma tecnologia usada por gigantes como Netflix e Uber (Next.js) para garantir que sua empresa 
+            esteja anos-luz à frente da concorrência local.
+          </p>
+
+          <div className="flex gap-4">
+            <a 
+               href="https://www.instagram.com/gabrieloliver.dev/" 
+               target="_blank"
+               className="flex items-center gap-2 text-white font-semibold hover:text-amber-400 transition-colors cursor-pointer"
+            >
+              <Instagram size={20} />
+              Acompanhar Bastidores
+            </a>
+          </div>
+        </motion.div>
+      </div>
+    </section>
+  );
+};
+
+// --- COMPONENTE FAQ ---
+const FAQSection = () => {
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
+
+  return (
+    <section className="py-20 px-6 max-w-4xl mx-auto w-full relative z-10">
+      <div className="text-center mb-16">
+        <span className="text-blue-500 font-mono text-sm tracking-wider uppercase">Tire suas dúvidas</span>
+        <h2 className="text-3xl md:text-4xl font-bold text-white mt-2">
+          Perguntas Frequentes
+        </h2>
+      </div>
+
+      <div className="flex flex-col gap-4">
+        {faqs.map((faq, index) => (
+          <motion.div 
+            key={index}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: index * 0.1 }}
+            className="border border-white/10 rounded-2xl bg-slate-900/50 overflow-hidden"
+          >
+            <button
+              onClick={() => setOpenIndex(openIndex === index ? null : index)}
+              className="w-full flex items-center justify-between p-6 text-left hover:bg-slate-800/50 transition-colors cursor-pointer"
+            >
+              <span className="text-lg font-semibold text-slate-200">{faq.question}</span>
+              {openIndex === index ? (
+                <Minus className="text-amber-400" />
+              ) : (
+                <Plus className="text-slate-500" />
+              )}
+            </button>
+            
+            <AnimatePresence>
+              {openIndex === index && (
+                <motion.div
+                  initial={{ height: 0, opacity: 0 }}
+                  animate={{ height: "auto", opacity: 1 }}
+                  exit={{ height: 0, opacity: 0 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <div className="p-6 pt-0 text-slate-400 leading-relaxed border-t border-white/5">
+                    {faq.answer}
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </motion.div>
+        ))}
+      </div>
+    </section>
+  );
+};
+
 export default function Home() {
-  // 1. ESTADO DO MODAL
   const [isModalOpen, setIsModalOpen] = useState(false);
-  
-  // 2. ESTADO DO FORMULÁRIO
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -201,27 +323,18 @@ export default function Home() {
     message: ''
   });
 
-  // 3. FUNÇÃO DE ENVIO
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     
-    // --- CÓDIGO DO GTM (NOVO) ---
-    // Verifica se estamos no navegador para evitar erros
     if (typeof window !== 'undefined') {
-      // Usamos (window as any) para o TypeScript não reclamar que dataLayer não existe
-      
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const dataLayer = (window as any).dataLayer || [];
-      
       dataLayer.push({
-        event: 'generate_lead', // Nome padrão que o Google Ads gosta
-        user_name: formData.name, // Opcional: enviar dados extras
+        event: 'generate_lead',
+        user_name: formData.name,
         selected_service: formData.service
       });
-      
-      console.log("Evento GTM disparado: generate_lead");
     }
-    // ----------------------------
 
     const text = `Olá Gabriel! Meu nome é *${formData.name}*. \nTenho interesse em: *${formData.service}*. \n\n${formData.message ? `Detalhes: ${formData.message}` : ''}`;
     const whatsappUrl = `https://wa.me/5516994064845?text=${encodeURIComponent(text)}`;
@@ -240,7 +353,7 @@ export default function Home() {
       
       <EnergyBackground />
 
-      {/* Navbar Atualizada */}
+      {/* Navbar */}
       <nav className="sticky top-0 z-50 bg-slate-950/70 backdrop-blur-md border-b border-white/5">
         <motion.div 
           initial={{ opacity: 0, y: -20 }}
@@ -254,7 +367,6 @@ export default function Home() {
             </span>
           </div>
 
-          {/* CORREÇÃO 1: Botão Navbar agora abre o modal */}
           <button 
             onClick={() => setIsModalOpen(true)}
             className="hidden md:inline-flex items-center gap-2 text-sm font-semibold text-slate-300 hover:text-amber-400 transition cursor-pointer"
@@ -267,11 +379,8 @@ export default function Home() {
 
       {/* Hero Section */}
       <section className="flex flex-col items-center justify-center text-center pt-15 pb-20 px-6 relative z-10">
-        
-        {/* AQUI ENTRA O NOVO LOGO */}
         <TechLogo />
 
-        {/* A antiga etiqueta 'Disponível' movida para baixo do logo, mas mais sutil */}
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -298,9 +407,9 @@ export default function Home() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5, delay: 0.4 }}
-          className="text-xl text-slate-300 max-w-2xl mb-12 leading-relaxed"
+          className="text-xl text-slate-300 max-w-lg mb-12 leading-relaxed mx-auto"
         >
-          Desenvolvimento de software de alta performance para escalar o seu negócio.
+          Transforme cliques em lucro. Tecnologia estratégica para escalar as suas vendas.
         </motion.p>
         
         <motion.div 
@@ -309,7 +418,6 @@ export default function Home() {
           transition={{ duration: 0.5, delay: 0.6 }}
           className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto"
         >
-          {/* CORREÇÃO 2: Botão Hero agora é <motion.button> e abre o modal */}
           <motion.button 
             onClick={() => setIsModalOpen(true)}
             whileHover={{ scale: 1.05 }}
@@ -330,17 +438,15 @@ export default function Home() {
         </motion.div>
       </section>
 
-      {/* --- TECH STACK MARQUEE --- */}
+      {/* Tech Stack */}
       <section className="py-10 border-y border-white/5 bg-slate-900/30 backdrop-blur-sm overflow-hidden relative z-10">
         <div className="max-w-full mx-auto">
           <p className="text-center text-xs text-slate-500 mb-6 uppercase tracking-widest font-mono">
             Powering applications with modern stack
           </p>
-          
           <div className="flex relative overflow-hidden">
             <div className="absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r from-slate-950 to-transparent z-10" />
             <div className="absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-slate-950 to-transparent z-10" />
-
             <motion.div 
               className="flex gap-12 whitespace-nowrap"
               animate={{ x: [0, -1000] }}
@@ -359,7 +465,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* --- SERVIÇOS --- */}
+      {/* Serviços */}
       <section id="servicos" className="py-24 px-6 max-w-6xl mx-auto w-full relative z-10">
         <div className="text-center mb-16">
           <h2 className="text-3xl font-bold text-white mb-4">Soluções Sob Medida</h2>
@@ -394,7 +500,7 @@ export default function Home() {
         </motion.div>
       </section>
 
-      {/* --- PROJETOS ---*/}
+      {/* Portfólio */}
       <section id="portfolio" className="py-24 px-9 max-w-6xl mx-auto w-full relative z-10">
         <div className="flex flex-col md:flex-row justify-between items-end mb-12 gap-4">
           <div>
@@ -416,28 +522,20 @@ export default function Home() {
               transition={{ duration: 0.5 }}
               className="group rounded-2xl overflow-hidden bg-slate-900/50 border border-white/5 transition-colors duration-300 hover:border-amber-500/30"
             >
-              {/* CONTAINER DA IMAGEM */}
               <div className="h-64 w-full relative overflow-hidden">
-                
-                {/* AQUI ESTÁ O USO DO COMPONENTE QUE FALTAVA */}
                 <Image 
                   src={project.image} 
                   alt={project.title}
                   fill 
                   className="object-cover object-center scale-[1.2] md:scale-[1.0] transition-transform duration-700 group-hover:scale-[1.05]"
                 />
-
-                {/* Overlay Escuro */}
                 <div className="absolute inset-0 bg-slate-950/20 group-hover:bg-slate-950/60 transition-colors duration-300" />
-
-                {/* Botão Hover */}
                 <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center z-10">
                   <span className="px-6 py-2 bg-amber-500 text-slate-950 font-bold rounded-full transform translate-y-4 group-hover:translate-y-0 transition-transform shadow-lg">
                     Ver Detalhes
                   </span>
                 </div>
               </div>
-
               <div className="p-8 border-t border-white/5">
                 <span className="text-xs font-mono text-amber-400 mb-2 block">{project.category}</span>
                 <h3 className="text-2xl font-bold text-white mb-3 group-hover:text-amber-400 transition-colors">{project.title}</h3>
@@ -449,6 +547,12 @@ export default function Home() {
           ))}
         </div>
       </section>
+
+      {/* --- SOBRE MIM --- */}
+      <AboutSection />
+
+      {/* --- FAQ --- */}
+      <FAQSection />
 
       {/* Footer */}
       <footer className="bg-slate-950/80 backdrop-blur border-t border-white/5 text-slate-400 py-12 px-6 relative z-10">
@@ -462,17 +566,16 @@ export default function Home() {
           
           <div className="flex gap-6">
             <a href="#" className="hover:text-amber-400 transition"><Linkedin size={20} /></a>
-            <a href="#" className="hover:text-amber-400 transition"><Github size={20} /></a>
-            <a href="#" className="hover:text-amber-400 transition"><Instagram size={20} /></a>
+            <a href="https://github.com/gaholiveira" className="hover:text-amber-400 transition"><Github size={20} /></a>
+            <a href="https://instagram.com/gah.dev" className="hover:text-amber-400 transition"><Instagram size={20} /></a>
           </div>
         </div>
       </footer>
 
-      {/* --- MODAL DE CONTATO --- */}
+      {/* Modal de Contato */}
       <AnimatePresence>
         {isModalOpen && (
           <div className="fixed inset-0 z-[100] flex items-center justify-center px-4">
-            
             <motion.div 
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -480,7 +583,6 @@ export default function Home() {
               onClick={() => setIsModalOpen(false)}
               className="absolute inset-0 bg-slate-950/80 backdrop-blur-sm"
             />
-
             <motion.div 
               initial={{ scale: 0.9, opacity: 0, y: 20 }}
               animate={{ scale: 1, opacity: 1, y: 0 }}
@@ -512,7 +614,6 @@ export default function Home() {
                     className="w-full bg-slate-950 border border-slate-800 rounded-lg p-3 text-white placeholder-slate-600 focus:outline-none focus:border-amber-500 transition-colors"
                   />
                 </div>
-
                 <div>
                   <label className="block text-xs font-mono text-amber-400 mb-1">INTERESSE</label>
                   <select 
@@ -527,7 +628,6 @@ export default function Home() {
                     <option>Outro Projeto</option>
                   </select>
                 </div>
-
                 <div>
                   <label className="block text-xs font-mono text-amber-400 mb-1">DETALHES (OPCIONAL)</label>
                   <textarea 
@@ -539,7 +639,6 @@ export default function Home() {
                     className="w-full bg-slate-950 border border-slate-800 rounded-lg p-3 text-white placeholder-slate-600 focus:outline-none focus:border-amber-500 transition-colors resize-none"
                   />
                 </div>
-
                 <button 
                   type="submit"
                   className="w-full py-4 bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold rounded-lg shadow-lg shadow-amber-500/20 transition-all transform active:scale-95 flex items-center justify-center gap-2 mt-4 cursor-pointer"

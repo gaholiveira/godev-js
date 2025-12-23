@@ -494,29 +494,52 @@ export default function Home() {
         </motion.div>
       </section>
 
-      {/* Tech Stack */}
+      {/* --- TECH STACK MARQUEE (Loop Infinito Corrigido) --- */}
       <section className="py-10 border-y border-white/5 bg-slate-900/30 backdrop-blur-sm overflow-hidden relative z-10">
         <div className="max-w-full mx-auto">
           <p className="text-center text-xs text-slate-500 mb-6 uppercase tracking-widest font-mono">
             Powering applications with modern stack
           </p>
-          <div className="flex relative overflow-hidden">
+          
+          {/* MUDANÇA: Container Flex que segura as duas faixas */}
+          <div className="flex overflow-hidden relative mask-linear-fade">
+            
+            {/* Gradientes laterais para suavizar a entrada/saída (Opcional, mas fica bonito) */}
             <div className="absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r from-slate-950 to-transparent z-10" />
             <div className="absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-slate-950 to-transparent z-10" />
+
+            {/* FAIXA 1 */}
             <motion.div 
-              className="flex gap-12 whitespace-nowrap"
-              animate={{ x: [0, -1000] }}
-              transition={{ repeat: Infinity, ease: "linear", duration: 20 }}
+              className="flex gap-12 whitespace-nowrap pr-12" // pr-12 é importante para manter o espaçamento no loop
+              animate={{ x: "-100%" }}
+              transition={{ repeat: Infinity, ease: "linear", duration: 25 }} // Aumentei para 25s para ler melhor
             >
-              {[...techStack, ...techStack, ...techStack].map((tech, index) => (
+              {techStack.map((tech, index) => (
                 <div key={index} className="flex items-center gap-2 group">
-                  <span className="text-2xl font-bold text-blue-600 group-hover:text-blue-400 transition-colors cursor-default shadow-blue-500/20 group-hover:shadow-[0_0_15px_rgba(59,130,246,0.5)]">
+                   <span className="text-2xl font-bold text-blue-600 group-hover:text-blue-400 transition-colors cursor-default shadow-blue-500/20 group-hover:shadow-[0_0_15px_rgba(59,130,246,0.5)]">
                     {tech}
                   </span>
                   <div className="w-1.5 h-1.5 rounded-full bg-blue-900/50" />
                 </div>
               ))}
             </motion.div>
+
+            {/* FAIXA 2 (Cópia exata que segue a primeira) */}
+            <motion.div 
+              className="flex gap-12 whitespace-nowrap pr-12"
+              animate={{ x: "-100%" }}
+              transition={{ repeat: Infinity, ease: "linear", duration: 25 }}
+            >
+              {techStack.map((tech, index) => (
+                <div key={`copy-${index}`} className="flex items-center gap-2 group">
+                   <span className="text-2xl font-bold text-blue-600 group-hover:text-blue-400 transition-colors cursor-default shadow-blue-500/20 group-hover:shadow-[0_0_15px_rgba(59,130,246,0.5)]">
+                    {tech}
+                  </span>
+                  <div className="w-1.5 h-1.5 rounded-full bg-blue-900/50" />
+                </div>
+              ))}
+            </motion.div>
+
           </div>
         </div>
       </section>

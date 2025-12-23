@@ -1,34 +1,90 @@
 'use client';
 
 import React, { useState } from 'react';
-// Adicionei Plus, Minus e Instagram aos imports
-import { Laptop, Smartphone, Bot, ChevronRight, Github, Linkedin, Instagram, FileCode2, X, Plus, Minus } from 'lucide-react';
+// Adicionei MessageCircle aos imports
+import { Laptop, Smartphone, Bot, ChevronRight, Github, Linkedin, Instagram, FileCode2, X, Plus, Minus, MessageCircle } from 'lucide-react';
 import { AnimatePresence, motion, Variants } from 'framer-motion';
 import Image from 'next/image';
 
-// --- COMPONENTE DE FUNDO OTIMIZADO ---
-const EnergyBackground = () => {
+// --- FUNDO HIGH TECH (FIXO, GRANDE & IMERSIVO) ---
+const HighTechBackground = () => {
   return (
-    <div className="absolute inset-0 overflow-hidden pointer-events-none">
+    // MUDANÇA 1: 'fixed' em vez de 'absolute'. Agora cobre a tela o tempo todo.
+    <div className="fixed inset-0 overflow-hidden pointer-events-none z-0">
+      
+      {/* 1. GRID BASE */}
       <div 
-        className="absolute inset-0 opacity-[0.03]"
+        className="absolute inset-0 opacity-[0.05]"
         style={{
-          backgroundImage: 'linear-gradient(#fff 1px, transparent 1px), linear-gradient(90deg, #fff 1px, transparent 1px)',
-          backgroundSize: '50px 50px',
+          backgroundImage: 'linear-gradient(#4f46e5 1px, transparent 1px), linear-gradient(90deg, #4f46e5 1px, transparent 1px)',
+          backgroundSize: '40px 40px',
         }}
       />
 
-      <motion.div 
-        animate={{ scale: [1, 1.2, 1], opacity: [0.3, 0.5, 0.3], x: [0, 100, 0], y: [0, -50, 0] }}
-        transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
-        className="absolute top-[-10%] left-[-10%] w-[500px] h-[500px] bg-blue-600 rounded-full mix-blend-screen filter blur-[100px] opacity-30 will-change-transform"
+      {/* 2. SCANNER (Linha que desce) */}
+      <motion.div
+        initial={{ top: "-10%" }}
+        animate={{ top: "110%" }}
+        transition={{ 
+          duration: 8,
+          repeat: Infinity, 
+          ease: "linear" 
+        }}
+        className="absolute left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-blue-400 to-transparent shadow-[0_0_20px_rgba(59,130,246,0.6)] opacity-50"
       />
 
+      {/* 3. BLOBS DE LUZ (Atmosfera) */}
       <motion.div 
-        animate={{ scale: [1, 1.5, 1], opacity: [0.2, 0.4, 0.2], x: [0, -100, 0], y: [0, 100, 0] }}
-        transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
-        className="absolute bottom-[-10%] right-[-10%] w-[600px] h-[600px] bg-amber-500 rounded-full mix-blend-screen filter blur-[120px] opacity-10 will-change-transform"
+        animate={{ scale: [1, 1.1, 1], opacity: [0.1, 0.2, 0.1] }}
+        transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+        className="absolute top-[-20%] left-[-20%] w-[800px] h-[800px] bg-blue-800 rounded-full mix-blend-screen filter blur-[120px] opacity-20"
       />
+
+      {/* 4. PARTÍCULAS DE DADOS (AGORA GRANDES E EM TODA A TELA) */}
+      
+      {/* Bloco 1 - Grande Azul (Esquerda) */}
+      <motion.div
+        // Começa lá embaixo (120vh) e vai até o topo (-20vh)
+        initial={{ y: "120vh" }}
+        animate={{ y: "-20vh", opacity: [0, 0.8, 0], rotate: 180 }}
+        transition={{ duration: 15, repeat: Infinity, ease: "linear", delay: 0 }}
+        // Aumentei para w-8 (32px)
+        className="absolute left-[10%] w-8 h-8 border border-blue-500 bg-blue-500/20 shadow-[0_0_20px_#3b82f6] backdrop-blur-sm"
+      />
+      
+      {/* Bloco 2 - Grande Amber (Direita) */}
+      <motion.div
+        initial={{ y: "120vh" }}
+        animate={{ y: "-20vh", opacity: [0, 0.6, 0], rotate: -90 }}
+        transition={{ duration: 18, repeat: Infinity, ease: "linear", delay: 5 }}
+        // Aumentei para w-12 (48px) - Bem visível
+        className="absolute right-[15%] w-12 h-12 border border-amber-500 bg-amber-500/10 shadow-[0_0_20px_#f59e0b] backdrop-blur-sm rounded-lg"
+      />
+
+      {/* Bloco 3 - Médio Rápido (Centro) */}
+      <motion.div
+        initial={{ y: "120vh" }}
+        animate={{ y: "-20vh", opacity: [0, 0.4, 0] }}
+        transition={{ duration: 10, repeat: Infinity, ease: "linear", delay: 2 }}
+        className="absolute left-[45%] w-4 h-4 bg-white shadow-[0_0_15px_white] rounded-sm"
+      />
+
+      {/* Bloco 4 - Pequeno Lento (Canto Inferior) */}
+      <motion.div
+        initial={{ y: "120vh" }}
+        animate={{ y: "-20vh", opacity: [0, 0.5, 0] }}
+        transition={{ duration: 25, repeat: Infinity, ease: "linear", delay: 0 }}
+        className="absolute left-[80%] w-6 h-6 border border-blue-300 bg-transparent shadow-[0_0_10px_#93c5fd]"
+      />
+
+       {/* Bloco 5 - Extra para preencher (Canto Superior Inicial) */}
+       <motion.div
+        initial={{ y: "50vh" }}
+        animate={{ y: "-20vh", opacity: [0, 0.3, 0] }}
+        transition={{ duration: 12, repeat: Infinity, ease: "linear", delay: 8 }}
+        className="absolute left-[20%] w-5 h-5 border border-purple-500 bg-purple-500/10"
+      />
+
     </div>
   );
 };
@@ -99,7 +155,7 @@ const projects = [
     id: 2,
     title: "App Financeiro",
     category: "Mobile • React Native",
-    image: "/prova.png", 
+    image: "/prova2.png", 
     description: "Aplicativo de controle financeiro pessoal com integração bancária segura."
   },
 ];
@@ -165,7 +221,7 @@ const TechLogo = () => {
             />
           </g>
           <text x="24.5" y="26" dominantBaseline="middle" textAnchor="middle" fontSize="4.0" fontFamily="monospace" fontWeight="600" className="select-none pointer-events-none tracking-widest">
-            <tspan fill="#3b82f6" dx="-0.5"></tspan>
+             <tspan fill="#3b82f6" dx="-0.5"></tspan>
             <tspan fill="#ffffff" dx="0.5">godev</tspan>
             <tspan fill="#fbbf24">.js</tspan>
             <tspan fill="#3b82f6" dx="0.5"></tspan>
@@ -233,7 +289,7 @@ const AboutSection = () => {
           
           <p className="text-slate-400 leading-relaxed mb-6 text-lg">
             Olá, sou o <strong className="text-white">Gabriel Oliveira</strong>. 
-            Acredito que um site lento e mal estruturado é dinheiro deixado na mesa.
+            Acredito que um site lento é dinheiro deixado na mesa.
           </p>
           
           <p className="text-slate-400 leading-relaxed mb-8">
@@ -351,7 +407,7 @@ export default function Home() {
   return (
     <main className="min-h-screen flex flex-col bg-slate-950 relative overflow-hidden font-sans selection:bg-blue-500 selection:text-white">
       
-      <EnergyBackground />
+      <HighTechBackground />
 
       {/* Navbar */}
       <nav className="sticky top-0 z-50 bg-slate-950/70 backdrop-blur-md border-b border-white/5">
@@ -454,10 +510,10 @@ export default function Home() {
             >
               {[...techStack, ...techStack, ...techStack].map((tech, index) => (
                 <div key={index} className="flex items-center gap-2 group">
-                  <span className="text-2xl font-bold text-slate-600 group-hover:text-amber-400 transition-colors cursor-default">
+                  <span className="text-2xl font-bold text-blue-600 group-hover:text-blue-400 transition-colors cursor-default shadow-blue-500/20 group-hover:shadow-[0_0_15px_rgba(59,130,246,0.5)]">
                     {tech}
                   </span>
-                  <div className="w-1.5 h-1.5 rounded-full bg-slate-800" />
+                  <div className="w-1.5 h-1.5 rounded-full bg-blue-900/50" />
                 </div>
               ))}
             </motion.div>
@@ -567,10 +623,28 @@ export default function Home() {
           <div className="flex gap-6">
             <a href="#" className="hover:text-amber-400 transition"><Linkedin size={20} /></a>
             <a href="https://github.com/gaholiveira" className="hover:text-amber-400 transition"><Github size={20} /></a>
-            <a href="https://instagram.com/gah.dev" className="hover:text-amber-400 transition"><Instagram size={20} /></a>
+            <a href="https://www.instagram.com/gabrieloliver.dev/" className="hover:text-amber-400 transition"><Instagram size={20} /></a>
           </div>
         </div>
       </footer>
+      
+      {/* --- BOTÃO FLUTUANTE WHATSAPP (Ajustado com a cor oficial + Estilo Dev) --- */}
+      <motion.button
+        onClick={() => setIsModalOpen(true)}
+        initial={{ scale: 0, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        transition={{ delay: 1 }}
+        whileHover={{ scale: 1.1 }}
+        whileTap={{ scale: 0.9 }}
+        // MUDANÇA: Usei a cor hex #25D366 (WhatsApp) mas mantive o shadow/glow customizado
+        className="fixed bottom-8 right-8 z-40 bg-[#25D366] text-white p-4 rounded-full shadow-[0_0_20px_rgba(37,211,102,0.5)] flex items-center justify-center cursor-pointer group hover:shadow-[0_0_30px_rgba(37,211,102,0.8)] transition-shadow duration-300"
+      >
+        {/* Ping Animation - Mantive para chamar atenção sutilmente */}
+        <span className="absolute inset-0 rounded-full bg-[#25D366] animate-ping opacity-75"></span>
+        
+        {/* Ícone - MessageCircle é mais elegante que o logo vetorizado cheio de curvas */}
+        <MessageCircle size={28} className="relative z-10 fill-white text-white" />
+      </motion.button>
 
       {/* Modal de Contato */}
       <AnimatePresence>

@@ -2,14 +2,14 @@
 
 import React, { useState } from 'react';
 // Adicionei MessageCircle aos imports
-import { Laptop, Smartphone, Bot, ChevronRight, Github, Linkedin, Instagram, FileCode2, X, Plus, Minus, MessageCircle } from 'lucide-react';
+import { Laptop, Smartphone, Bot, ChevronRight, Github, Linkedin, Instagram, FileCode2, X, Plus, Minus, MessageCircle, ChevronDown } from 'lucide-react';
 import { AnimatePresence, motion, Variants } from 'framer-motion';
 import Image from 'next/image';
 
 // --- FUNDO HIGH TECH (FIXO, GRANDE & IMERSIVO) ---
+// --- FUNDO HIGH TECH (CORRIGIDO: SEM ARTEFATOS QUADRADOS) ---
 const HighTechBackground = () => {
   return (
-    // MUDANÇA 1: 'fixed' em vez de 'absolute'. Agora cobre a tela o tempo todo.
     <div className="fixed inset-0 overflow-hidden pointer-events-none z-0">
       
       {/* 1. GRID BASE */}
@@ -21,7 +21,7 @@ const HighTechBackground = () => {
         }}
       />
 
-      {/* 2. SCANNER (Linha que desce) */}
+      {/* 2. SCANNER */}
       <motion.div
         initial={{ top: "-10%" }}
         animate={{ top: "110%" }}
@@ -33,35 +33,48 @@ const HighTechBackground = () => {
         className="absolute left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-blue-400 to-transparent shadow-[0_0_20px_rgba(59,130,246,0.6)] opacity-50"
       />
 
-      {/* 3. BLOBS DE LUZ (Atmosfera) */}
+      {/* 3. BLOBS DE LUZ (CORREÇÃO AQUI) */}
+      {/* Removemos o 'mix-blend-screen' e o 'blur' pesado. Usamos gradiente radial. */}
+      
+      {/* Blob Azul (Topo Esquerda) */}
       <motion.div 
-        animate={{ scale: [1, 1.1, 1], opacity: [0.1, 0.2, 0.1] }}
+        animate={{ scale: [1, 1.1, 1], opacity: [0.3, 0.5, 0.3] }}
         transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute top-[-20%] left-[-20%] w-[800px] h-[800px] bg-blue-800 rounded-full mix-blend-screen filter blur-[120px] opacity-20"
+        className="absolute top-[-20%] left-[-10%] w-[800px] h-[800px] rounded-full"
+        style={{
+          background: 'radial-gradient(circle, rgba(30, 64, 175, 0.4) 0%, rgba(0, 0, 0, 0) 70%)',
+        }}
       />
 
-      {/* 4. PARTÍCULAS DE DADOS (AGORA GRANDES E EM TODA A TELA) */}
+      {/* Blob Amber/Roxo (Fundo Direita - Opcional para dar profundidade) */}
+      <motion.div 
+        animate={{ scale: [1, 1.2, 1], opacity: [0.2, 0.4, 0.2] }}
+        transition={{ duration: 12, repeat: Infinity, ease: "easeInOut", delay: 2 }}
+        className="absolute bottom-[-20%] right-[-10%] w-[600px] h-[600px] rounded-full"
+        style={{
+          background: 'radial-gradient(circle, rgba(245, 158, 11, 0.15) 0%, rgba(0, 0, 0, 0) 70%)',
+        }}
+      />
+
+      {/* 4. PARTÍCULAS DE DADOS */}
       
-      {/* Bloco 1 - Grande Azul (Esquerda) */}
+      {/* Bloco 1 - Grande Azul */}
       <motion.div
-        // Começa lá embaixo (120vh) e vai até o topo (-20vh)
         initial={{ y: "120vh" }}
         animate={{ y: "-20vh", opacity: [0, 0.8, 0], rotate: 180 }}
         transition={{ duration: 15, repeat: Infinity, ease: "linear", delay: 0 }}
-        // Aumentei para w-8 (32px)
         className="absolute left-[10%] w-8 h-8 border border-blue-500 bg-blue-500/20 shadow-[0_0_20px_#3b82f6] backdrop-blur-sm"
       />
       
-      {/* Bloco 2 - Grande Amber (Direita) */}
+      {/* Bloco 2 - Grande Amber */}
       <motion.div
         initial={{ y: "120vh" }}
         animate={{ y: "-20vh", opacity: [0, 0.6, 0], rotate: -90 }}
         transition={{ duration: 18, repeat: Infinity, ease: "linear", delay: 5 }}
-        // Aumentei para w-12 (48px) - Bem visível
         className="absolute right-[15%] w-12 h-12 border border-amber-500 bg-amber-500/10 shadow-[0_0_20px_#f59e0b] backdrop-blur-sm rounded-lg"
       />
 
-      {/* Bloco 3 - Médio Rápido (Centro) */}
+      {/* Bloco 3 - Médio Rápido */}
       <motion.div
         initial={{ y: "120vh" }}
         animate={{ y: "-20vh", opacity: [0, 0.4, 0] }}
@@ -69,7 +82,7 @@ const HighTechBackground = () => {
         className="absolute left-[45%] w-4 h-4 bg-white shadow-[0_0_15px_white] rounded-sm"
       />
 
-      {/* Bloco 4 - Pequeno Lento (Canto Inferior) */}
+      {/* Bloco 4 - Pequeno Lento */}
       <motion.div
         initial={{ y: "120vh" }}
         animate={{ y: "-20vh", opacity: [0, 0.5, 0] }}
@@ -77,7 +90,7 @@ const HighTechBackground = () => {
         className="absolute left-[80%] w-6 h-6 border border-blue-300 bg-transparent shadow-[0_0_10px_#93c5fd]"
       />
 
-       {/* Bloco 5 - Extra para preencher (Canto Superior Inicial) */}
+       {/* Bloco 5 - Extra */}
        <motion.div
         initial={{ y: "50vh" }}
         animate={{ y: "-20vh", opacity: [0, 0.3, 0] }}
@@ -100,20 +113,20 @@ interface ServiceItem {
 const services: ServiceItem[] = [
   { 
     id: 1, 
-    title: "Sites de Alta Conversão", 
-    description: "Seu site carrega em 1 segundo? O meu sim. Otimizado para o Google (SEO) para colocar sua empresa no topo sem gastar com anúncios.", 
+    title: "Sites & Landing Pages", 
+    description: "Não perca 40% das suas vendas por um site lento. Desenvolvo páginas em Next.js que carregam instantaneamente e posicionam sua marca no topo do Google.", 
     icon: Laptop 
   },
   { 
     id: 2, 
-    title: "Apps Próprios", 
-    description: "Fidelize seus melhores clientes. Pare de depender de algoritmos de terceiros e tenha seu próprio canal de vendas direto no bolso do cliente.", 
+    title: "Apps Próprios (iOS/Android)", 
+    description: "Saia do aluguel das plataformas. Tenha seu próprio canal de vendas (Delivery ou Cursos) com notificações push para vender direto no bolso do cliente.", 
     icon: Smartphone 
   },
   { 
     id: 3, 
-    title: "Automação de Vendas", 
-    description: "Atenda 100 clientes ao mesmo tempo. Automatize agendamentos e suporte para vender enquanto você dorme.", 
+    title: "Automação com IA", 
+    description: "Atenda 24h/dia sem funcionários extras. Chatbots inteligentes (Node.js) que filtram curiosos, agendam horários e recuperam vendas automaticamente.", 
     icon: Bot 
   },
 ];
@@ -375,7 +388,7 @@ export default function Home() {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
-    service: 'Desenvolvimento Web',
+    service: '',
     message: ''
   });
 
@@ -427,7 +440,7 @@ export default function Home() {
             onClick={() => setIsModalOpen(true)}
             className="hidden md:inline-flex items-center gap-2 text-sm font-semibold text-slate-300 hover:text-amber-400 transition cursor-pointer"
           >
-            <span>Contratar Dev</span>
+            <span>Iniciar Projeto</span>
             <ChevronRight size={16} />
           </button>
         </motion.div>
@@ -698,9 +711,11 @@ export default function Home() {
                 <p className="text-slate-400 text-sm">Preencha os dados e será redirecionado para o meu WhatsApp já com tudo pronto.</p>
               </div>
 
-              <form onSubmit={handleSubmit} className="space-y-4">
+              <form onSubmit={handleSubmit} className="space-y-6"> {/* Mudei de space-y-4 para space-y-6 (Mais respiro geral) */}
+                
+                {/* NOME */}
                 <div>
-                  <label className="block text-xs font-mono text-amber-400 mb-1">SEU NOME</label>
+                  <label className="block text-xs font-mono text-amber-400 mb-2">SEU NOME</label> {/* Aumentei mb-1 para mb-2 */}
                   <input 
                     required
                     type="text" 
@@ -711,22 +726,35 @@ export default function Home() {
                     className="w-full bg-slate-950 border border-slate-800 rounded-lg p-3 text-white placeholder-slate-600 focus:outline-none focus:border-amber-500 transition-colors"
                   />
                 </div>
-                <div>
-                  <label className="block text-xs font-mono text-amber-400 mb-1">INTERESSE</label>
-                  <select 
-                    name="service"
-                    value={formData.service}
-                    onChange={handleChange}
-                    className="w-full bg-slate-950 border border-slate-800 rounded-lg p-3 text-white focus:outline-none focus:border-amber-500 transition-colors appearance-none"
-                  >
-                    <option>Desenvolvimento Web</option>
-                    <option>App Mobile (iOS/Android)</option>
-                    <option>Automação & Bots</option>
-                    <option>Outro Projeto</option>
-                  </select>
+
+                {/* SELECT CUSTOMIZADO (Com a seta e placeholder que fizemos) */}
+                <div className="relative">
+                  <label className="block text-xs font-mono text-amber-400 mb-2">INTERESSE</label>
+                  
+                  <div className="relative">
+                    <select 
+                      name="service"
+                      required
+                      value={formData.service}
+                      onChange={handleChange}
+                      className={`w-full bg-slate-950 border border-slate-800 rounded-lg p-3 pr-10 focus:outline-none focus:border-amber-500 transition-colors appearance-none cursor-pointer ${formData.service === '' ? 'text-slate-500' : 'text-white'}`}
+                    >
+                      <option value="" disabled hidden>Selecione um objetivo...</option>
+                      <option value="Site/Landing Page">Quero vender mais (Site/Landing Page)</option>
+                      <option value="App Mobile">App Próprio (Delivery/EAD/Serviços)</option>
+                      <option value="Automação/Bot">Automação de WhatsApp & IA</option>
+                      <option value="Consultoria">Consultoria Completa</option>
+                    </select>
+
+                    <div className="absolute inset-y-0 right-0 flex items-center px-3 pointer-events-none">
+                      <ChevronDown size={18} className="text-slate-500" />
+                    </div>
+                  </div>
                 </div>
-                <div>
-                  <label className="block text-xs font-mono text-amber-400 mb-1">DETALHES (OPCIONAL)</label>
+
+                {/* DETALHES (Com margem extra no topo para desgrudar) */}
+                <div className="pt-2"> {/* Adicionei pt-2 para forçar um distanciamento extra visual */}
+                  <label className="block text-xs font-mono text-amber-400 mb-2">DETALHES (OPCIONAL)</label>
                   <textarea 
                     name="message"
                     value={formData.message}
@@ -736,9 +764,10 @@ export default function Home() {
                     className="w-full bg-slate-950 border border-slate-800 rounded-lg p-3 text-white placeholder-slate-600 focus:outline-none focus:border-amber-500 transition-colors resize-none"
                   />
                 </div>
+
                 <button 
                   type="submit"
-                  className="w-full py-4 bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold rounded-lg shadow-lg shadow-amber-500/20 transition-all transform active:scale-95 flex items-center justify-center gap-2 mt-4 cursor-pointer"
+                  className="w-full py-4 bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold rounded-lg shadow-lg shadow-amber-500/20 transition-all transform active:scale-95 flex items-center justify-center gap-2 mt-2 cursor-pointer"
                 >
                   <FileCode2 size={20} />
                   Gerar Mensagem WhatsApp
